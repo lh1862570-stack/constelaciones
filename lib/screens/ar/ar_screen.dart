@@ -119,6 +119,14 @@ class _ARScreenState extends State<ARScreen> with WidgetsBindingObserver {
   }
 
   void _onTapConstellation(Constellation c) {
+    // Toggle: si ya está enfocada, quitar enfoque
+    if (_focused?.iauName == c.iauName) {
+      setState(() {
+        _focused = null;
+        _spriteScale = 1.0;
+      });
+      return;
+    }
     setState(() {
       _focused = c;
       _spriteScale = 1.8;

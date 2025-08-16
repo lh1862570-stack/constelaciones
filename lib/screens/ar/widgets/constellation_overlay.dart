@@ -73,12 +73,16 @@ class ConstellationOverlay extends StatelessWidget {
     // Overlay centrado si hay enfoque
     if (focused != null) {
       stackChildren.add(Center(
-        child: SizedBox(
-          width: 128 * scale,
-          height: 128 * scale,
-          child: _ConstellationSprite(
-            iauName: focused!.iauName,
-            assetPath: focused!.assetPath,
+        child: GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          onTap: () => onTapConstellation(focused!),
+          child: SizedBox(
+            width: 128 * scale,
+            height: 128 * scale,
+            child: _ConstellationSprite(
+              iauName: focused!.iauName,
+              assetPath: focused!.assetPath,
+            ),
           ),
         ),
       ));
