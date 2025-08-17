@@ -50,14 +50,15 @@ class _ARScreenState extends State<ARScreen> with WidgetsBindingObserver {
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    final CameraController? cameraController = _cameraController;
-    if (cameraController == null || !cameraController.value.isInitialized) {
+    if (state == AppLifecycleState.inactive || state == AppLifecycleState.paused || state == AppLifecycleState.detached) {
+      // Liberar cámara y evitar que el preview use un controller disposed
+      _cameraController?.dispose();
+      _cameraController = null;
+      setState(() {});
       return;
     }
-    if (state == AppLifecycleState.inactive) {
-      cameraController.dispose();
-    } else if (state == AppLifecycleState.resumed) {
-      _initFuture = _initialize(reuse: true);
+    if (state == AppLifecycleState.resumed) {
+      _initFuture = _initialize(reuse: false);
       setState(() {});
     }
   }
@@ -110,9 +111,9 @@ class _ARScreenState extends State<ARScreen> with WidgetsBindingObserver {
       orElse: () => cameras.isNotEmpty ? cameras.first : throw Exception('No hay cámaras disponibles'),
     );
 
-    if (!reuse) {
-      await _cameraController?.dispose();
-    }
+    // Si ya existe, dispón y crea uno nuevo siempre para evitar estados inválidos
+    await _cameraController?.dispose();
+    _cameraController = null;
 
     _cameraController = CameraController(
       backCamera,
@@ -120,7 +121,13 @@ class _ARScreenState extends State<ARScreen> with WidgetsBindingObserver {
       enableAudio: false,
       imageFormatGroup: ImageFormatGroup.yuv420,
     );
-    await _cameraController!.initialize();
+    try {
+      await _cameraController!.initialize();
+    } catch (e) {
+      // En interrupciones del sistema (panel de notificaciones) puede fallar; deja nulo
+      await _cameraController?.dispose();
+      _cameraController = null;
+    }
   }
 
   void _onTapConstellation(Constellation c) {
@@ -256,9 +263,14 @@ class _ARScreenState extends State<ARScreen> with WidgetsBindingObserver {
                       child: CircularProgressIndicator(color: Colors.white),
                     );
                   }
-                  if (_cameraController == null || !_cameraController!.value.isInitialized) {
+                  if (_cameraController == null) {
                     return const Center(
-                      child: Text('No se pudo inicializar la cámara', style: TextStyle(color: Colors.white)),
+                      child: Text('Cámara no disponible', style: TextStyle(color: Colors.white)),
+                    );
+                  }
+                  if (!_cameraController!.value.isInitialized) {
+                    return const Center(
+                      child: CircularProgressIndicator(color: Colors.white),
                     );
                   }
                   return Stack(
