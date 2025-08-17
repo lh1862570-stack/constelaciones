@@ -74,6 +74,7 @@ flutter:
     - assets/lottie/telescope.json
     - assets/constellations/
     - assets/data/iau_constellations.json
+    - assets/data/constellations_info.es.json
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

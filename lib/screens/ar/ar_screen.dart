@@ -9,6 +9,7 @@ import 'models/constellation.dart';
 import 'sensors/orientation_stream.dart';
 import 'widgets/constellation_overlay.dart';
 import 'location/location_provider.dart';
+import 'data/info_repository.dart';
 
 class ARScreen extends StatefulWidget {
   const ARScreen({super.key});
@@ -29,6 +30,7 @@ class _ARScreenState extends State<ARScreen> with WidgetsBindingObserver {
   double? _lastLongitude;
   Constellation? _focused;
   double _spriteScale = 1.0;
+  Map<String, ConstellationInfo>? _infoByName; // key: iau lowercased
 
   @override
   void initState() {
@@ -80,6 +82,9 @@ class _ARScreenState extends State<ARScreen> with WidgetsBindingObserver {
     final List<Constellation> loaded = await IauRepository().loadConstellations();
     _constellations = loaded;
 
+    // Cargar descripciones
+    _infoByName ??= await InfoRepository().loadInfo();
+
     // Iniciar orientación
     _orientationController ??= DeviceOrientationController(alpha: 0.15);
     await _orientationController!.start();
@@ -125,6 +130,8 @@ class _ARScreenState extends State<ARScreen> with WidgetsBindingObserver {
         _focused = null;
         _spriteScale = 1.0;
       });
+      // Cerrar sheet si está abierto
+      Navigator.of(context).maybePop();
       return;
     }
     setState(() {
@@ -138,6 +145,90 @@ class _ARScreenState extends State<ARScreen> with WidgetsBindingObserver {
         _spriteScale = 1.2;
       });
     });
+
+    _showInfoSheetFor(c);
+  }
+
+  void _onTapBackground() {
+    setState(() {
+      _focused = null;
+      _spriteScale = 1.0;
+    });
+    Navigator.of(context).maybePop();
+  }
+
+  void _showInfoSheetFor(Constellation c) {
+    final String key = c.iauName.trim().toLowerCase();
+    final ConstellationInfo? info = _infoByName?[key];
+    final String title = info?.title ?? c.iauName;
+    final List<String> paragraphs = info?.paragraphs ?? <String>[
+      'Información no disponible. Puedes añadirla en assets/data/constellations_info.es.json.',
+    ];
+
+    showModalBottomSheet<void>(
+      context: context,
+      backgroundColor: const Color(0xFF121212),
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(25)),
+      ),
+      builder: (BuildContext context) {
+        return Padding(
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom,
+          ),
+          child: SafeArea(
+            top: false,
+            child: DraggableScrollableSheet(
+              initialChildSize: 0.25,
+              minChildSize: 0.2,
+              maxChildSize: 0.75,
+              expand: false,
+              builder: (BuildContext context, ScrollController scrollController) {
+                return SingleChildScrollView(
+                  controller: scrollController,
+                  padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Expanded(
+                            child: Text(
+                              title,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w600,
+                              ),
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                          IconButton(
+                            icon: const Icon(Icons.close, color: Colors.white70),
+                            onPressed: () => Navigator.of(context).maybePop(),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 8),
+                      for (final String p in paragraphs) ...<Widget>[
+                        Text(
+                          p,
+                          style: const TextStyle(color: Colors.white70, height: 1.35),
+                        ),
+                        const SizedBox(height: 10),
+                      ],
+                    ],
+                  ),
+                );
+              },
+            ),
+          ),
+        );
+      },
+    );
   }
 
   @override
@@ -183,6 +274,7 @@ class _ARScreenState extends State<ARScreen> with WidgetsBindingObserver {
                           onTapConstellation: _onTapConstellation,
                           focused: _focused,
                           scale: _spriteScale,
+                          onTapBackground: _onTapBackground,
                         ),
                     ],
                   );

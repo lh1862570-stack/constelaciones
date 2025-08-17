@@ -4,6 +4,7 @@ import '../models/constellation.dart';
 import '../projection/projector.dart';
 
 typedef OnConstellationTap = void Function(Constellation constellation);
+typedef OnBackgroundTap = void Function();
 
 class ConstellationOverlay extends StatelessWidget {
   const ConstellationOverlay({
@@ -17,6 +18,7 @@ class ConstellationOverlay extends StatelessWidget {
     required this.onTapConstellation,
     this.focused,
     this.scale = 1.0,
+    required this.onTapBackground,
   });
 
   final List<Constellation> constellations;
@@ -28,6 +30,7 @@ class ConstellationOverlay extends StatelessWidget {
   final OnConstellationTap onTapConstellation;
   final Constellation? focused;
   final double scale;
+  final OnBackgroundTap onTapBackground;
 
   static const double snapThresholdPx = 12.0;
 
@@ -39,7 +42,15 @@ class ConstellationOverlay extends StatelessWidget {
       verticalFovDegrees: verticalFovDegrees,
     );
 
-    final List<Widget> stackChildren = <Widget>[];
+    final List<Widget> stackChildren = <Widget>[
+      // Captura taps en espacios vacíos
+      Positioned.fill(
+        child: GestureDetector(
+          behavior: HitTestBehavior.translucent,
+          onTap: onTapBackground,
+        ),
+      ),
+    ];
     const double spriteSize = 128.0; // tamaño base un poco más grande
     const double halfSprite = spriteSize / 2.0;
 

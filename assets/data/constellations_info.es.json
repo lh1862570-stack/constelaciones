@@ -1,0 +1,109 @@
+{
+  "Ursa Major": {"title": "Ursa Major (Osa Mayor)", "paragraphs": [
+    "Una de las constelaciones más reconocibles; su ‘Carro’ se usa como guía hacia la Estrella Polar.",
+    "En relatos ficticios, se dice que sus estrellas guardan un antiguo mapa celeste.",
+    "Excelente para observación en noches claras del hemisferio norte."
+  ]},
+  "Ursa Minor": {"title": "Ursa Minor (Osa Menor)", "paragraphs": [
+    "Hogar de Polaris, la Estrella Polar, referencia del norte celeste.",
+    "Historias imaginarias la describen como la fiel compañera de la Osa Mayor.",
+    "Ideal para aprender a orientarse en el cielo nocturno."
+  ]},
+  "Draco": {"title": "Draco (El Dragón)", "paragraphs": [
+    "Serpentea entre las osas; su forma alargada envuelve el polo norte celeste.",
+    "Fábulas cuentan que custodia tesoros estelares en su cola.",
+    "Visibilidad mejor en latitudes del norte."
+  ]},
+  "Cepheus": {"title": "Cepheus (Cefeo)", "paragraphs": [
+    "Constelación del rey mitológico y vecina de Casiopea.",
+    "En relatos inventados, su corona brilla en noches despejadas.",
+    "Incluye estrellas variables interesantes para aficionados."
+  ]},
+  "Cassiopeia": {"title": "Cassiopeia (Casiopea)", "paragraphs": [
+    "Fácil de identificar por su forma de ‘W’ o ‘M’.",
+    "En historias ficticias, su trono apunta siempre a nuevos descubrimientos.",
+    "Excelente objetivo para binoculares y cámaras."
+  ]},
+  "Leo": {"title": "Leo (El León)", "paragraphs": [
+    "Representado por un león; su estrella Régulo marca el corazón.",
+    "Cuentos inventados lo muestran rugiendo durante las lluvias de meteoros.",
+    "Prominente en cielos de primavera del hemisferio norte."
+  ]},
+  "Virgo": {"title": "Virgo (La Virgen)", "paragraphs": [
+    "Una de las constelaciones más extensas, con la brillante Spica.",
+    "Relatos fantásticos la asocian con cosechas estelares.",
+    "Incluye cúmulos de galaxias accesibles con telescopios."
+  ]},
+  "Boötes": {"title": "Boötes (El Boyero)", "paragraphs": [
+    "Arcturus es su faro naranja visible desde ciudades.",
+    "Leyendas inventadas lo pintan guiando cometas por el cielo.",
+    "Buena referencia para saltos de estrellas."
+  ]},
+  "Scorpius": {"title": "Scorpius (Escorpio)", "paragraphs": [
+    "Con Antares como corazón rojizo, domina cielos de verano austral.",
+    "Historias ficticias dicen que su aguijón marca rutas interestelares.",
+    "Contiene la Vía Láctea rica en nebulosas."
+  ]},
+  "Sagittarius": {"title": "Sagittarius (Sagitario)", "paragraphs": [
+    "Apunta hacia el centro galáctico; ‘la Tetera’ es su asterismo famoso.",
+    "Cuentan relatos que su flecha señala portales estelares.",
+    "Objetivo clásico para observar nebulosas brillantes."
+  ]},
+  "Lyra": {"title": "Lyra (La Lira)", "paragraphs": [
+    "Pequeña pero notable por Vega, una de las estrellas más brillantes.",
+    "Ficciones la describen resonando con música del cosmos.",
+    "Incluye la Nebulosa del Anillo (M57)."
+  ]},
+  "Cygnus": {"title": "Cygnus (El Cisne)", "paragraphs": [
+    "Cruza la Vía Láctea; Deneb marca su cola.",
+    "Cuentos fantásticos hablan de vuelos a través de nubes estelares.",
+    "Rica en campos de estrellas para astrofotografía."
+  ]},
+  "Aquila": {"title": "Aquila (El Águila)", "paragraphs": [
+    "Altair, su estrella principal, forma el Triángulo de Verano.",
+    "Relatos inventados dicen que remonta corrientes de viento solar.",
+    "Buena zona para observación estival."
+  ]},
+  "Pegasus": {"title": "Pegasus (Pegaso)", "paragraphs": [
+    "Su Gran Cuadrado es un hito del cielo otoñal.",
+    "Fábulas lo muestran cabalgando sobre corrientes de estrellas.",
+    "Región con galaxias accesibles a telescopios."
+  ]},
+  "Andromeda": {"title": "Andromeda (Andrómeda)", "paragraphs": [
+    "Hogar de la galaxia de Andrómeda (M31), visible a simple vista en cielos oscuros.",
+    "Relatos ficticios narran viajes a través de sus brazos espirales.",
+    "Ideal para iniciarse en objetos de cielo profundo."
+  ]},
+  "Cetus": {"title": "Cetus (La Ballena)", "paragraphs": [
+    "Amplia constelación ecuatorial con estrellas variables.",
+    "Historias inventadas la muestran surcando mares estelares.",
+    "Interesante en noches de otoño."
+  ]},
+  "Orion": {"title": "Orion (Orión)", "paragraphs": [
+    "Famosa por el cinturón de tres estrellas y la nebulosa M42.",
+    "Ficción: su caza eterna apunta a horizontes invernales.",
+    "Imprescindible en la temporada de invierno."
+  ]},
+  "Taurus": {"title": "Taurus (Tauro)", "paragraphs": [
+    "Incluye las Pléyades (M45) y las Híades.",
+    "Relatos ficticios hablan de cuernos que señalan rutas estelares.",
+    "Excelente con binoculares en noches claras."
+  ]},
+  "Canis Major": {"title": "Canis Major (Can Mayor)", "paragraphs": [
+    "Contiene a Sirio, la estrella más brillante del cielo nocturno.",
+    "Historias inventadas lo muestran guardián de Orión.",
+    "Visible en verano austral y invierno boreal."
+  ]},
+  "Gemini": {"title": "Gemini (Géminis)", "paragraphs": [
+    "Castor y Pólux son sus gemelos emblemáticos.",
+    "Relatos ficticios: mensajeros de lluvias de meteoros.",
+    "Interesante en noches de invierno-primavera."
+  ]},
+  "Eridanus": {"title": "Eridanus (Erídano)", "paragraphs": [
+    "Largo río celeste que serpentea por el cielo austral.",
+    "Cuentos inventados relatan viajes en sus corrientes de luz.",
+    "Abarca región extensa con estrellas variadas."
+  ]}
+}
+
+
