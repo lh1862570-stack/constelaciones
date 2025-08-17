@@ -40,6 +40,8 @@ class ConstellationOverlay extends StatelessWidget {
     );
 
     final List<Widget> stackChildren = <Widget>[];
+    const double spriteSize = 128.0; // tamaño base un poco más grande
+    const double halfSprite = spriteSize / 2.0;
 
     for (final Constellation c in constellations) {
       for (final ConstellationRegion r in c.regions) {
@@ -54,10 +56,10 @@ class ConstellationOverlay extends StatelessWidget {
 
         final Offset snapped = _applySnapping(c.iauName, projected);
         stackChildren.add(Positioned(
-          left: snapped.dx - 32,
-          top: snapped.dy - 32,
-          width: 64,
-          height: 64,
+          left: snapped.dx - halfSprite,
+          top: snapped.dy - halfSprite,
+          width: spriteSize,
+          height: spriteSize,
           child: GestureDetector(
             behavior: HitTestBehavior.opaque,
             onTap: () => onTapConstellation(c),
@@ -77,8 +79,8 @@ class ConstellationOverlay extends StatelessWidget {
           behavior: HitTestBehavior.opaque,
           onTap: () => onTapConstellation(focused!),
           child: SizedBox(
-            width: 128 * scale,
-            height: 128 * scale,
+            width: 144 * scale,
+            height: 144 * scale,
             child: _ConstellationSprite(
               iauName: focused!.iauName,
               assetPath: focused!.assetPath,
